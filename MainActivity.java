@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.appcompat.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,16 +24,26 @@ public class MainActivity extends AppCompatActivity {
         fold = findViewById(R.id.fold);
         firstNumber = findViewById(R.id.firstNumber);
         secondNumber = findViewById(R.id.secondNumber);
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
 
         fold.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                int one = Integer.parseInt(firstNumber.getText().toString());
-                int two = Integer.parseInt(secondNumber.getText().toString());
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                intent.putExtra("first", one);
-                intent.putExtra("second", two);
-                startActivity(intent);
+                try {
+                    int one = Integer.parseInt(String.valueOf(firstNumber.getText()));
+                    int two = Integer.parseInt(String.valueOf(secondNumber.getText()));
+                    startActivity(intent);
+                } catch (Exception ex) {
+                    AlertDialog.Builder message = new AlertDialog.Builder(MainActivity.this);
+                    message.setTitle("Ошибка");
+                    message.setMessage("Неверные входные данные, введите еще раз");
+                    message.setPositiveButton("Ок", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+                    message.show();
+                }
             }
         });
     }
