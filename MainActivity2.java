@@ -17,10 +17,10 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        result = (TextView) findViewById(R.id.result);
+        result = findViewById(R.id.result);
 
-        int one = getIntent().getExtras().getInt("first");
-        int two = getIntent().getExtras().getInt("second");
+        int one = getIntent().getExtras().getInt("one");
+        int two = getIntent().getExtras().getInt("two");
         int result3 = one + two;
         if(two < 0){
             result.setText(String.valueOf(one) + " + " + "(" + String.valueOf(two) + ")" + " = " + String.valueOf(result3));
