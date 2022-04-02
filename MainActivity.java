@@ -24,16 +24,19 @@ public class MainActivity extends AppCompatActivity {
         fold = findViewById(R.id.fold);
         firstNumber = findViewById(R.id.firstNumber);
         secondNumber = findViewById(R.id.secondNumber);
-        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
 
         fold.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 try {
+                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     int one = Integer.parseInt(String.valueOf(firstNumber.getText()));
                     int two = Integer.parseInt(String.valueOf(secondNumber.getText()));
+                    intent.putExtra("one", one);
+                    intent.putExtra("two", two);
                     startActivity(intent);
-                } catch (Exception ex) {
+                    }
+                catch (Exception ex) {
                     AlertDialog.Builder message = new AlertDialog.Builder(MainActivity.this);
                     message.setTitle("Ошибка");
                     message.setMessage("Неверные входные данные, введите еще раз");
